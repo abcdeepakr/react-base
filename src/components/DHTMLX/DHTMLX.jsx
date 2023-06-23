@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Grid } from '../../../suite_trial/codebase/suite'
 import '../../../suite_trial/codebase/suite.css'
-import config from './dhtmlx.config'
+import {config} from './dhtmlx.config'
 function DHTMLX() {
 
     useEffect(() => {
         const grid = new Grid("grid_container", config);
-
-
         //* all events can be found here https://snippet.dhtmlx.com/owcnoj0i
         const events = [
             "afterEditStart",

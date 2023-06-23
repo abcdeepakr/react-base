@@ -70,4 +70,4 @@ let config = {
 
 
 
-export default config
+export{config}
