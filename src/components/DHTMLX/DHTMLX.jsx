@@ -74,7 +74,7 @@ function DHTMLX() {
         });
 
 
-        // https://snippet.dhtmlx.com/owcnoj0i
+        //* all events can be found here https://snippet.dhtmlx.com/owcnoj0i
         const events = [
             "afterEditStart",
             "afterEditEnd"
