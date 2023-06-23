@@ -39,10 +39,10 @@ let config = {
     ],
     width: "auto",
     height: "auto",
-    adjust: "header",
+    // adjust: "header",
     resizable: true,
     sortable: true,
-    data: dataset,
+    // data: dataset,
     // TODO unable to pass onchange event here
     eventHandlers: {
         onclick: {
@@ -60,14 +60,15 @@ let config = {
     },
     editable: true,
     dragItem: "both", //* we can also drag and drop between grids
-
     //* below two properties ensure multi selection and draggability of rows
     selection: "row",
     multiselection: true,
-
+    pager: {
+        container: "pager_container",
+        pageSize: 2, // Number of rows per page
+        pageSizes: [10, 20, 30], // Optional: Available page sizes for the user to choose from
+        showPagesCount: 5 // Optional: Number of visible page numbers in the pager
+      }
 }
-
-
-
 
 export{config}

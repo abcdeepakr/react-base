@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from 'react'
-import { Grid } from '../../../suite_trial/codebase/suite'
+import { Grid, Pagination, LazyDataProxy } from '../../../suite_trial/codebase/suite'
 import '../../../suite_trial/codebase/suite.css'
-import {config} from './dhtmlx.config'
+import { config } from './dhtmlx.config'
 function DHTMLX() {
 
     useEffect(() => {
+        let lazyDataProxy = new LazyDataProxy("https://docs.dhtmlx.com/suite/backend/lazyload", {
+            limit: 10,
+            prepare: 5,
+            delay: 150,
+            from: 0
+        });
+        // const grid = new Grid("grid_container");
         const grid = new Grid("grid_container", config);
+        grid.data.load(lazyDataProxy);
         //* all events can be found here https://snippet.dhtmlx.com/owcnoj0i
         const events = [
             "afterEditStart",
             "afterEditEnd"
         ];
 
-        // handler cleanup
+        //* event handlers
         function eventHandler(event, args) {
             switch (event) {
                 case "afterEditEnd": {
@@ -37,10 +45,10 @@ function DHTMLX() {
 
 
         //* Filtering
-        grid.data.filter({
-            by: "isCountry",
-            match: true
-        });
+        // grid.data.filter({
+        //     by: "isCountry",
+        //     match: true
+        // });
 
         //* Searching
         var searchResult = grid.data.findAll({ by: "isCountry", match: true });
@@ -49,13 +57,23 @@ function DHTMLX() {
         //* Sorting
         // https://docs.dhtmlx.com/suite/tree_collection/api/treecollection_sort_method/
 
-        // const state = grid.data.serialize();  //* save the state into a strigified json
+        const state = grid.data.serialize();  //* save the state into a strigified json
+
+        //* Pagination
+
+        const pagination = new Pagination("pagination", {
+            css: "dhx_widget--bordered dhx_widget--no-border_top",
+            data: grid.data,
+            pageSize:10,
+        });
     }, [])
 
 
     return (
         <>
             <div id="grid_container"></div>
+            <div id="pager_container" ></div>
+
         </>
 
     )
